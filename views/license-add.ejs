@@ -1,0 +1,38 @@
+<% include ./partials/header %>
+<div class="card card-body">
+  <h2>Add a new license</h2>
+  <% include ./partials/messages %>
+  <form action="/license/add" method="post">
+    <fieldset>
+
+      <div class="form-group">
+        <label for="licensename">License Name</label>
+        <input type="text" class="form-control" id="licensename" name="licensename" placeholder="Enter license name">
+      </div>
+
+      <div class="form-group">
+        <label for="licenseemail">License Email</label>
+        <input type="email" class="form-control" id="licenseemail" name="licenseemail"
+          placeholder="Enter license email">
+      </div>
+
+      <div class="form-group">
+        <label for="licensekey">License Key</label>
+        <input type="text" class="form-control" id="licensekey" name="licensekey" value="<%= licenseKeyGen %>"
+          readonly="">
+      </div>
+
+      <div class="form-group">
+        <label for="selectproject">Select A Project</label>
+        <select class="form-control" id="selectproject" name="licenseproject">
+          <% projects.forEach(project => { %>
+          <option value="<%= project.name %>"><%= project.name %></option>
+          <% }) %>
+
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </fieldset>
+  </form>
+</div>

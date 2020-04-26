@@ -1,0 +1,58 @@
+<% include ./partials/header %>
+<div class="card card-body">
+  <h2>Edit license : <%= license.licensekey %></h2>
+  <% include ./partials/messages %>
+  <form action="/license/edit" method="post">
+    <fieldset>
+
+      <div class="form-group">
+        <label for="licensename">License Name</label>
+        <input type="text" class="form-control" id="licensename" name="licensename" placeholder="Enter license name"
+          value="<%= license.name %>">
+      </div>
+
+      <div class="form-group">
+        <label for="licenseemail">License Email</label>
+        <input type="email" class="form-control" id="licenseemail" name="licenseemail" placeholder="Enter license email"
+          value="<%= license.email %>">
+      </div>
+
+      <div class="form-group">
+        <label for="licensekey">License Key</label>
+        <input type="text" class="form-control" id="licensekey" name="licensekey" value="<%= license.licensekey %>"
+          readonly="">
+      </div>
+
+      <div class="form-group">
+        <label for="selectproject">Select A Project</label>
+        <select class="form-control" id="selectproject" name="licenseproject">
+          <% projects.forEach(project => { %>
+          <% if(license.project == project.name) { %>
+          <option selected value="<%= project.name %>"><%= project.name %></option>
+          <% } else { %>
+          <option value="<%= project.name %>"><%= project.name %></option>
+          <% } %>
+
+          <% }) %>
+        </select>
+      </div>
+
+      <div class="custom-control custom-switch">
+
+        <% if(license.enabled == true){ %>
+        <input type="checkbox" class="custom-control-input" id="customSwitch1" name="enabled" checked="">
+        <% } else { %>
+        <input type="checkbox" class="custom-control-input" id="customSwitch1" name="enabled">
+        <% } %>
+        <label class="custom-control-label" for="customSwitch1">License Enabled?</label>
+      </div>
+
+      <input type="hidden" name="_id" value="<%= license._id %>">
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Add License</button>
+      </div>
+
+    </fieldset>
+  </form>
+</div>

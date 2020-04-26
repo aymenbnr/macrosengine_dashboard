@@ -1,0 +1,70 @@
+<% include ./partials/header %>
+<div class="card card-body">
+    <h2>Add a new Project</h2>
+    <% include ./partials/messages %>
+    <form action="/project/add" method="post">
+        <fieldset>
+
+            <div class="form-group">
+                <label for="projectname">Project Name</label>
+                <input type="text" class="form-control" id="projectname" name="projectname"
+                    placeholder="Enter project name">
+            </div>
+
+            <div class="form-group">
+                <label for="secretkey">Secret Key (automatically generated)</label>
+                <input type="text" class="form-control" id="secretkey" name="secretkey" value="<%= secretkey %>"
+                    readonly="">
+            </div>
+
+            <div class="form-group">
+                <label for="mainupdateurl">Main Updater Url</label>
+                <input type="text" class="form-control" id="mainupdateurl" name="mainupdateurl"
+                    placeholder="Enter main update url">
+            </div>
+
+            <div class="form-group">
+                <label for="installerurl">Installer Url</label>
+                <input type="text" class="form-control" id="installerurl" name="installerurl"
+                    placeholder="Enter installer url">
+            </div>
+
+            <div class="form-group">
+                <label for="nbactivations">Number Of Computers This Project Can Be Activated On:</label>
+                <select class="form-control" id="nbactivations" name="nbactivations">
+                    ><option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="999999">999999</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="activetrials">trials active:</label>
+                <select class="form-control" id="activetrials" name="activetrials">
+                    <option value="yes">yes</option>
+                    <option value="no">no</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="trialsruns">Number of trials activations:</label>
+                <input type="text" class="form-control" id="trialsruns" name="trialsruns" value="3">
+            </div>
+
+            <div class="form-group">
+                <label for="notes">Enter a description or notes for this project (optional)</label>
+                <textarea class="form-control" id="notes" name="notes" rows="4" spellcheck="false"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </fieldset>
+    </form>
+</div>

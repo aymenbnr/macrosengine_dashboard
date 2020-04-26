@@ -1,0 +1,21 @@
+<% include ./partials/header %>
+<h2 class="mt-4">API Settings</h2>
+
+<% include ./partials/messages %>
+
+<form action="/apikeys/save" method="post">
+  <fieldset>
+    <div class="form-group">
+      <label for="apikeyname">Secret Key</label>
+      <input
+        type="text"
+        class="form-control"
+        id="apikeyname"
+        name="apikeyname"
+        placeholder="Enter secret key"
+        value="<%= apisettings.apikey %>"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">save settings</button>
+  </fieldset>
+</form>

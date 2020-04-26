@@ -1,0 +1,74 @@
+<% include ./partials/header %>
+<div class="card card-body">
+  <h2>Edit User : <%= name %></h2>
+  <% include ./partials/messages %>
+  <form action="/users/edit" method="post">
+    <fieldset>
+      <div class="form-group">
+        <label for="name">User Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          placeholder="Enter user name"
+          value="<%= name %>"
+          readonly=""
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">User Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          value="<%= email %>"
+          readonly=""
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="newpass">New Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="newpass"
+          name="newpass"
+          placeholder=""
+          value=""
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="newpass">Repeat New Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="newpass2"
+          name="newpass2"
+          placeholder=""
+          value=""
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="access">Access Level:</label>
+        <select class="form-control" id="access" name="access">
+          <% if (access == 'admin') { %>
+          <option value="admin" selected>Admin</option>
+          <% } else { %>
+          <option value="admin">Admin</option>
+          <% } %> <% if (access == 'user') { %>
+          <option value="user" selected>User</option>
+          <% } else { %>
+          <option value="user">User</option>
+          <% } %>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </fieldset>
+  </form>
+</div>

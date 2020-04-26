@@ -1,0 +1,167 @@
+<% include ./partials/header %>
+<div class="card card-body">
+  <h3>Project Details</h3>
+  <% include ./partials/messages %>
+
+  <div>
+    <fieldset>
+      <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label font-weight-bold"
+          >Name:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly=""
+            class="form-control-plaintext"
+            id="name"
+            value="<%= project.name %>"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="secretkey" class="col-sm-2 col-form-label font-weight-bold"
+          >Secret Key:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly=""
+            class="form-control-plaintext"
+            id="secretkey"
+            value="<%= project.secretkey %>"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="updateurl" class="col-sm-2 col-form-label font-weight-bold"
+          >Update Url:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly=""
+            class="form-control-plaintext"
+            id="updateurl"
+            value="<%= project.updateurl %>"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label
+          for="installerurl"
+          class="col-sm-2 col-form-label font-weight-bold"
+          >Installer Url:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly=""
+            class="form-control-plaintext"
+            id="installerurl"
+            value="<%= project.installerurl %>"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="notes" class="col-sm-2 col-form-label font-weight-bold"
+          >Description:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly=""
+            class="form-control-plaintext"
+            id="notes"
+            value="<%= project.notes %>"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label
+          for="activations"
+          class="col-sm-2 col-form-label font-weight-bold"
+          >Activations:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly=""
+            class="form-control-plaintext"
+            id="activations"
+            value="<%= project.activations %>"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="demo" class="col-sm-2 col-form-label font-weight-bold"
+          >Demo:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly=""
+            class="form-control-plaintext"
+            id="demo"
+            value="<%= project.demo %>"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="licensekey" class="col-sm-2 col-form-label font-weight-bold"
+          >Demo Tries:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly=""
+            class="form-control-plaintext"
+            id="demotries"
+            value="<%= project.demotries %>"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label
+          for="latestVersion"
+          class="col-sm-2 col-form-label font-weight-bold"
+          >Latest Version:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly=""
+            class="form-control-plaintext"
+            id="latestVersion"
+            value="<%= project.latestVersion %>"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label
+          for="latestRelease"
+          class="col-sm-2 col-form-label font-weight-bold"
+          >Latest Release:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly=""
+            class="form-control-plaintext"
+            id="latestRelease"
+            value="<%= project.latestRelease %>"
+          />
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</div>

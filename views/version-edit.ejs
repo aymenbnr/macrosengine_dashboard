@@ -1,0 +1,84 @@
+<% include ./partials/header %>
+<div class="card card-body">
+  <h2>Edit Version</h2>
+  <% include ./partials/messages %>
+  <form action="/version/edit" method="post">
+    <fieldset>
+      <div class="form-group">
+        <label for="projectname">Project Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="projectname"
+          name="projectname"
+          value="<%= version.projectName %>"
+          readonly
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="version">Version</label>
+        <input
+          type="text"
+          class="form-control"
+          id="version"
+          name="version"
+          value="<%= version.version %>"
+          readonly
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="updateurl">Updater Url</label>
+        <input
+          type="text"
+          class="form-control"
+          id="updateurl"
+          name="updateurl"
+          placeholder="Enter update url if different from main updater url"
+          value="<%= version.updateurl %>"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="releasedate">Release Date</label>
+        <input
+          type="date"
+          placeholder="Selected date"
+          class="form-control datepicker"
+          id="releasedate"
+          name="releasedate"
+          value="<%= version.releasedate %>"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="summary">Summary (optional)</label>
+        <textarea
+          class="form-control"
+          id="summary"
+          name="summary"
+          rows="3"
+          spellcheck="false"
+        >
+<%= version.summary %></textarea
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="changelog">Changelog (optional)</label>
+        <textarea
+          class="form-control"
+          id="changelog"
+          name="changelog"
+          rows="5"
+          spellcheck="false"
+        >
+<%= version.changelog %></textarea
+        >
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </fieldset>
+  </form>
+</div>

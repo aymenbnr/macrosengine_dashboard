@@ -1,0 +1,188 @@
+<% include ./partials/header %>
+<div class="card card-body">
+  <h3>License Details</h3>
+  <% include ./partials/messages %>
+
+  <div>
+    <fieldset>
+      <div class="form-group row">
+        <label for="licensekey" class="col-sm-2 col-form-label font-weight-bold"
+          >License Key:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly=""
+            class="form-control-plaintext"
+            id="licensekey"
+            value="<%= license.licensekey %>"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="licname" class="col-sm-2 col-form-label font-weight-bold"
+          >License Name:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly=""
+            class="form-control-plaintext"
+            id="licname"
+            value="<%= license.name %>"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="licemail" class="col-sm-2 col-form-label font-weight-bold"
+          >License Email:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly=""
+            class="form-control-plaintext"
+            id="licemail"
+            value="<%= license.email %>"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="licproject" class="col-sm-2 col-form-label font-weight-bold"
+          >Project:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly=""
+            class="form-control-plaintext"
+            id="licproject"
+            value="<%= license.project %>"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label
+          for="creationdate"
+          class="col-sm-2 col-form-label font-weight-bold"
+          >License Status:</label
+        >
+        <div class="col-sm-10">
+          <% if(license.enabled == true){ %>
+          <span class="badge badge-pill badge-success">Enabled</span>
+          <% } else { %>
+          <span class="badge badge-pill badge-danger">Disabled</span>
+          <% } %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label
+          for="creationdate"
+          class="col-sm-2 col-form-label font-weight-bold"
+          >Creation Date:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly=""
+            class="form-control-plaintext"
+            id="creationdate"
+            value="<%= license.date %>"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="licensekey" class="col-sm-2 col-form-label font-weight-bold"
+          >Activation Date:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly=""
+            class="form-control-plaintext"
+            id="licensekey"
+            value="<%= log.activeDate %>"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="licensekey" class="col-sm-2 col-form-label font-weight-bold"
+          >Last Time Used:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly=""
+            class="form-control-plaintext"
+            id="licensekey"
+            value="<%= log.lastAccessDate %>"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="licensekey" class="col-sm-2 col-form-label font-weight-bold"
+          >Last IP Used:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly=""
+            class="form-control-plaintext"
+            id="licensekey"
+            value="<%= log.lastIP %>"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="licensekey" class="col-sm-2 col-form-label font-weight-bold"
+          >Reset License Activations:</label
+        >
+        <div class="col-sm-10">
+          <a
+            href="/license/reset/<%= license.id %>"
+            type="button"
+            class="btn btn-info"
+            >Reset License</a
+          >
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <% if(license.enabled == true){ %>
+        <label for="licensekey" class="col-sm-2 col-form-label font-weight-bold"
+          >Disable License:</label
+        >
+        <div class="col-sm-10">
+          <a
+            href="/license/disable/<%= license.id %>"
+            type="button"
+            class="btn btn-danger"
+            >Disable License</a
+          >
+        </div>
+        <% } else { %>
+        <label for="licensekey" class="col-sm-2 col-form-label font-weight-bold"
+          >Enable License:</label
+        >
+        <div class="col-sm-10">
+          <a
+            href="/license/enable/<%= license.id %>"
+            type="button"
+            class="btn btn-success"
+            >Enable License</a
+          >
+        </div>
+        <% } %>
+      </div>
+    </fieldset>
+  </div>
+</div>

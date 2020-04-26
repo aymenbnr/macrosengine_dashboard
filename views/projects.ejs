@@ -1,0 +1,93 @@
+<% include ./partials/header %>
+<h2 class="mt-4">Projects Manager</h2>
+<% include ./partials/messages %>
+<a href="/project/add" class="btn btn-primary">Add Project</a>
+</br></br>
+
+<table id="example" class="table table-striped table-bordered" style="width:100%">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Latest Version</th>
+      <th>Last Release</th>
+      <th>Activations</th>
+      <th>Demo Version</th>
+      <th></th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+    <% projects.forEach(project => { %>
+
+    <tr scope="row">
+
+      <td><%= project.name %></td>
+
+      <td><%= project.latestVersion %> </td>
+
+      <td><%= project.latestRelease %></td>
+
+      <td><%= project.activations %></td>
+
+      <td> <%= project.demo %> </td>
+
+
+      <td>
+
+
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-cog"></i> <b>Options</b>
+          </button>
+          <div class="dropdown-menu">
+
+
+              <a class="dropdown-item" href="/project/delete/<%= project._id %>" aria-label="Left Align"
+                data-toggle="tooltip" data-placement="top" title="delete project" 
+                onclick="return confirm('Are you sure you want to delete this project?');">
+                <i class="fas fa-trash-alt"></i> Delete</a>
+
+  <a class="dropdown-item" href="/project/edit/<%= project._id %>" aria-label="Left Align"
+    data-toggle="tooltip" data-placement="top" title="edit project">
+    <i class="fas fa-edit"></i> Edit
+  </a>
+
+
+     <a class="dropdown-item" href="/version/add/<%= project._id %>" aria-label="Left Align"
+      data-toggle="tooltip" data-placement="top" title="add new version">
+      <i class="fas fa-plus-square"></i> Add New Version</a>
+
+      <a class="dropdown-item" href="/version/edit/<%= project._id %>" aria-label="Left Align"
+        data-toggle="tooltip" data-placement="top" title="edit version">
+        <i class="fas fa-code-branch"></i> Edit Version
+      </a>
+
+       <a class="dropdown-item" href="/version/all/<%= project._id %>" aria-label="Left Align"
+        data-toggle="tooltip" data-placement="top" title="edit version">
+        <i class="fas fa-list"></i> Versions List
+      </a>
+
+      <a class="dropdown-item" href="/project/view/<%= project._id %>" aria-label="Left Align"
+        data-toggle="tooltip" data-placement="top" title="view project details">
+        <i class="fas fa-info-circle"></i> View Project Details
+      </a>
+          </div>
+        </div>
+
+
+        
+
+
+
+
+      </td>
+
+
+    </tr>
+
+    <% }) %>
+
+  </tbody>
+</table>

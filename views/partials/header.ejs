@@ -1,0 +1,61 @@
+<div class="page-header">
+  <div class="col-8">
+    <h1 id="navbars"><%= process.env.TEXTLOGO %></h1>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="/">Dashboard</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarColor01"
+      aria-controls="navbarColor01"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/"
+            >Home <span class="sr-only">(current)</span></a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/projects">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/licenses">Licenses</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logs">Activity Logs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/userslist">Users</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+            >Settings</a
+          >
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/mainsettings">Main Settings</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/msgconfigs">Global Messages</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/ipnsettings">IPN Settings</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/apisettings">API Settings</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <p class="nav navbar-nav navbar-right">
+      Welcome <b>&nbsp; <%= user.name %></b>&nbsp;
+      <a href="/users/logout" class="btn btn-dark btn-sm">Logout</a>
+    </p>
+  </nav>
+</div>

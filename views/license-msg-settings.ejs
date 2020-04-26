@@ -1,0 +1,81 @@
+<% include ./partials/header %>
+<div class="card card-body">
+  <h2>Settings</h2>
+  <% include ./partials/messages %>
+  <form action="/settings" method="post">
+    <fieldset>
+      <div class="form-group">
+        <label for="lic_success"><b>Global License Success Message</b></label>
+        <textarea
+          class="form-control"
+          id="lic_success"
+          name="lic_success"
+          rows="3"
+          spellcheck="false"
+        >
+<%= lic_success %></textarea
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="lic_failed"><b>Global License Failed Message</b></label>
+        <textarea
+          class="form-control"
+          id="lic_failed"
+          name="lic_failed"
+          rows="3"
+          spellcheck="false"
+        >
+<%= lic_failed %></textarea
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="lic_deactivated"
+          ><b>Global License Deactivated Message</b></label
+        >
+        <textarea
+          class="form-control"
+          id="lic_deactivated"
+          name="lic_deactivated"
+          rows="3"
+          spellcheck="false"
+        >
+<%= lic_deactivated %></textarea
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="lic_exceeded"
+          ><b>Global License Exceed Limits Message</b></label
+        >
+        <textarea
+          class="form-control"
+          id="lic_exceeded"
+          name="lic_exceeded"
+          rows="3"
+          spellcheck="false"
+        >
+<%= lic_exceeded %></textarea
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="lic_expired"><b>Global License Expired Message</b></label>
+        <textarea
+          class="form-control"
+          id="lic_expired"
+          name="lic_expired"
+          rows="3"
+          spellcheck="false"
+        >
+<%= lic_expired %></textarea
+        >
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </fieldset>
+  </form>
+</div>

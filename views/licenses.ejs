@@ -1,0 +1,78 @@
+<% include ./partials/header %>
+<h2 class="mt-4">Licenses Manager</h2>
+<a href="/license/add" class="btn btn-primary">Add License</a> 
+<% include ./partials/messages %>
+</br></br>
+
+<table  id="example" class="table table-striped table-bordered" style="width:100%">
+  <thead>
+    <tr>
+      <th>Project Name</th>
+      <th>License Key</th>
+      <th>License Name</th>
+      <th>License Email</th>
+      <th style="width: 8%">Activ.</th>
+      <th style="width: 10%">Enabled</th>
+      <th></th>
+
+    </tr>
+  </thead>
+    <tbody>
+      
+      <% licenses.forEach(license => { %>
+
+        <tr scope="row"> 
+
+          <td> <%= license.project %></td> 
+          
+          <td> <%= license.licensekey %></td> 
+          
+          <td> <%= license.name %> </td> 
+          
+          <td> <%= license.email %> </td> 
+          
+          <td> <%= license.activations %> </td> 
+          
+          <td> 
+
+            <% if(license.enabled == true){ %>
+              <span class="badge badge-pill badge-success">Enabled</span> 
+            <% } else { %> 
+              <span class="badge badge-pill badge-danger">Disabled</span>
+            <% } %>
+          </td> 
+          
+          <td> 
+
+<div class="btn-group">
+  <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fas fa-cog"></i> <b>Options</b>
+  </button>
+  <div class="dropdown-menu">
+
+      <a class="dropdown-item" href="/license/delete/<%= license._id %>" aria-label="Left Align" onclick="return confirm('Are you sure you want to delete this license?');">
+      <i class="fas fa-trash-alt"></i> Delete
+    </a> 
+ 
+      <a class="dropdown-item" href="/license/edit/<%= license._id %>" aria-label="Left Align">
+      <i class="fas fa-edit"></i> Edit
+    </a> 
+
+    <a class="dropdown-item" href="/license/view/<%= license._id %>" aria-label="Left Align">
+    <i class="fas fa-info-circle"></i> Details
+  </a> 
+
+  </div>
+</div>
+
+
+           </td> 
+
+          </tr>
+
+           <% }) %>
+          
+    
+    </tbody>
+  </table>
+

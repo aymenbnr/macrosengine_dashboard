@@ -1,0 +1,25 @@
+<% include ./partials/header %>
+<div class="card card-body">
+<h2>IPN Settings</h2>
+<% include ./partials/messages %>
+<form action="/ipnsettings" method="post">
+    <fieldset>
+
+      <div class="form-group">
+        <label for="cb_secret"><b>Clickbank Secret Key</b></label>
+        <input type="text" class="form-control" id="cb_secret" name="cb_secret" value="<%= cb_secret %>" placeholder="Enter Clickbank secret key" >
+      </div>
+
+      <div class="form-group">
+        <label for="jvzoo_secret"><b>JVZoo Secret Key</b></label>
+        <input type="text" class="form-control" id="jvzoo_secret" name="jvzoo_secret"  value="<%= jvzoo_secret %>" placeholder="Enter JVZoo secret key" >
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+     
+     
+    </fieldset>
+  </form>
+</div>

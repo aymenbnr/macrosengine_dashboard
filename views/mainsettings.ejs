@@ -1,0 +1,25 @@
+<% include ./partials/header %>
+<div class="card card-body">
+  <h2>Main Settings</h2>
+  <% include ./partials/messages %>
+
+  <fieldset>
+    <div class="card">
+      <div class="card-header">Backup Settings</div>
+
+      <div class="form-group">
+        <button class="btn btn-primary" type="button">Export Data</button>
+      </div>
+
+      <form method="POST" action="/backup/import" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="import">Import Data</label>
+          <input id=import" class="form-control" type="file" name="importfile">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary" type="submit">Import Data</button>
+        </div>
+      </form>
+    </div>
+  </fieldset>
+</div>

@@ -1,0 +1,39 @@
+{
+  "name": "macrosengine_dashboard",
+  "version": "2.0.0",
+  "description": "Node.js authentication with Passport",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "crypto-js": "^4.0.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.15.6",
+    "file-saver": "^2.0.2",
+    "formidable": "^1.2.2",
+    "isomorphic-unfetch": "^3.0.0",
+    "jszip": "^3.3.0",
+    "jvzoo-ipn-signature-verifier": "^1.0.3",
+    "mongoose": "^5.7.5",
+    "njwt": "^1.0.0",
+    "nodemailer": "^6.4.6",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pp-ipn": "^1.1.0",
+    "uid-generator": "^2.0.0",
+    "versiony": "^2.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
