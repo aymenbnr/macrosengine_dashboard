@@ -18,7 +18,7 @@ $ npm run dev
 # Visit http://localhost:5000
 ```
 
-### MongoDB
+### App Configuration
 
 create a .env file with the following variables
 
