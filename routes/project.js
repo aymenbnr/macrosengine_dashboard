@@ -55,17 +55,65 @@ router.post("/add", ensureAuthenticated, (req, res) => {
   });
 });
 
+router.post("/edit", ensureAuthenticated, async (req, res) => {
+  const {
+    projectname,
+    secretkey,
+    mainupdateurl,
+    installerurl,
+    nbactivations,
+    activetrials,
+    trialsruns,
+    notes,
+    versions,
+    _id,
+  } = req.body;
+
+  var project = await Project.findById(_id);
+  if (project == null) {
+    console.log("no project found");
+  }
+  project.name = projectname;
+  project.secretkey = secretkey;
+  project.updateurl = mainupdateurl;
+  project.installerurl = installerurl;
+  project.notes = notes;
+  project.activations = nbactivations;
+  project.demotries = trialsruns;
+  project.demo = activetrials;
+  var version = await Version.findOne({
+    version: versions,
+    projectName: projectname,
+  });
+
+  if (version) {
+    project.latestVersion = versions;
+    project.latestRelease = version.releasedate;
+  }
+
+  //project.project = licenseproject;
+  //project.name = licensename;
+  //project.email = licenseemail;
+
+  project.save().then(() => {
+    req.flash("success_msg", `Project has been updated`);
+    res.redirect("/projects");
+  });
+});
+
 // edit project GET
 router.get("/edit/:id", ensureAuthenticated, async (req, res) => {
   var proj = await Project.findById(req.params.id);
   var versions = await Version.find({
     projectName: proj.name,
   });
+  var activationsList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 99999];
   //var test = await fetch("https://api.coindesk.com/v1/bpi/currentprice.json");
-  //console.log(test.bpi.USD.rate);
+  console.log(versions);
   res.render("project-edit", {
     project: proj,
-    versions: versions,
+    versionsList: versions,
+    activationsList: activationsList,
     user: req.user,
   });
 });
@@ -83,14 +131,12 @@ router.get("/view/:id", ensureAuthenticated, async (req, res) => {
 router.get("/delete/:id", ensureAuthenticated, (req, res) => {
   // delete project code here
 
-  Project.findById(req.params.id).then((project) => {
+  Project.findByIdAndDelete(req.params.id).then((project) => {
     if (project) {
-      Project.deleteOne(project);
+      req.flash("success_msg", "Project deleted!");
+      res.redirect("/projects");
     }
   });
-
-  req.flash("success_msg", "Project deleted!");
-  res.redirect("/projects");
 });
 
 module.exports = router;

@@ -60,19 +60,14 @@
           class="form-control"
           id="nbactivations"
           name="nbactivations"
-          onload="setActivations('<%= project.activations %>')"
         >
-          ><option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-          <option value="999999">999999</option>
+
+        <% activationsList.forEach(activ => { %>
+          <option value="<%= activ %>"  
+            <%= activ == project.activations ? 'selected' : '' %>><%= activ %></option>
+          <% }) %>
+
+
         </select>
       </div>
 
@@ -84,8 +79,8 @@
           name="activetrials"
           onload="setTrials('<%= project.demo %>')"
         >
-          <option value="yes">yes</option>
-          <option value="no">no</option>
+          <option value="yes" <%= project.demo == true ? 'selected' : '' %>>yes</option>
+          <option value="no" <%=  project.demo == false ? 'selected' : '' %>>no</option>
         </select>
       </div>
 
@@ -96,7 +91,7 @@
           class="form-control"
           id="trialsruns"
           name="trialsruns"
-          value="<%= project.nbtrials %>"
+          value="<%= project.demotries %>"
         />
       </div>
 
@@ -121,13 +116,15 @@
           class="form-control"
           id="versions"
           name="versions"
-          onload="setVersion('<%= project.latestVersion %>')"
         >
-          <% versions.forEach(version => { %>
-          <option value="<%= version.name %>"><%= version.name %></option>
+          <% versionsList.forEach(version => { %>
+          <option value="<%= version.version %>"  
+            <%= version.version == project.latestVersion ? 'selected' : '' %>><%= version.version %></option>
           <% }) %>
         </select>
       </div>
+
+      <input type="hidden" name="_id" value="<%= project._id %>" />
 
       <button type="submit" class="btn btn-primary">Submit</button>
     </fieldset>

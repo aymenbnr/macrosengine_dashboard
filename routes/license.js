@@ -119,6 +119,26 @@ router.get("/reset/:id", ensureAuthenticated, async (req, res) => {
   res.redirect("/license/view/" + req.params.id);
 });
 
+router.get("/disable/:id", ensureAuthenticated, async (req, res) => {
+  console.log(req.params.id);
+  var license = await License.findByIdAndUpdate(req.params.id, {
+    enabled: false,
+  });
+  await license.save();
+  req.flash("success_msg", "License disabled!");
+  res.redirect("/license/view/" + req.params.id);
+});
+
+router.get("/enable/:id", ensureAuthenticated, async (req, res) => {
+  console.log(req.params.id);
+  var license = await License.findByIdAndUpdate(req.params.id, {
+    enabled: true,
+  });
+  await license.save();
+  req.flash("success_msg", "License disabled!");
+  res.redirect("/license/view/" + req.params.id);
+});
+
 //edit license
 router.get("/edit/:id", ensureAuthenticated, async (req, res) => {
   const projects = await Project.find();
