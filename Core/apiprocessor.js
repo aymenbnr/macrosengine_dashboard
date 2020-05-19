@@ -32,6 +32,7 @@ async function ProcessApiRequest(endpoint, req, res) {
         claims.res = "error";
         claims.message = error;
       } else {
+        console.log("calling endpoint : " + endpoint);
         if (endpoint == "verify") {
           var resp = await VerifyEndpoint(payload);
           console.log(resp);
