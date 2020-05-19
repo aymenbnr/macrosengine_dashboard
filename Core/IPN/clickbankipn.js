@@ -40,8 +40,8 @@ const processIpn = async (notification) => {
     ) {
       var license = await CreateLicense({
         project: firstProject.productTitle,
-        fullname: notification.billing.fullName,
-        email: notification.billing.email,
+        fullname: notification.customer.billing.fullName,
+        email: notification.customer.billing.email,
         source: "clickbank",
       });
       await SendLicenseEmail(license);
