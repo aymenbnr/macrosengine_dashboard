@@ -1,3 +1,6 @@
+const express = require("express");
+const router = express.Router();
+
 const { ProcessIpnRequest } = require("../Core/ipnProcessor");
 
 router.post("/:endpoint", async (req, res) => {
