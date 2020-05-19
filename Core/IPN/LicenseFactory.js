@@ -36,7 +36,7 @@ const CreateLicense = async (order) => {
   await AddLicense(licenseObject);
 
   const newLog = new Logs({
-    license: licensekey,
+    license: dashLicense,
     logtype: "order",
     logtext: `${order.source} SALE / receipt: ${order.receipt}`,
     logdate: createdDate,
