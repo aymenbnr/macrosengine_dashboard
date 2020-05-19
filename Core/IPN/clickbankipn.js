@@ -36,7 +36,7 @@ const processIpn = async (notification) => {
     var [firstProject] = notification.lineItems;
     if (
       notification.transactionType == "SALE" ||
-      notification.transactionType == "TEST"
+      notification.transactionType == "TEST_SALE"
     ) {
       var license = await CreateLicense({
         project: firstProject.productTitle,
@@ -44,6 +44,7 @@ const processIpn = async (notification) => {
         email: notification.billing.email,
         source: "clickbank",
       });
+      await SendLicenseEmail(license);
     } else if (
       notification.transactionType == "RFND" ||
       notification.transactionType == "CGBK"
