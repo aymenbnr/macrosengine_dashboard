@@ -18,10 +18,9 @@ async function ClickBank(req) {
   var cbSetting = await Setting.findOne({ name: "cb_secret" });
   if (cbSetting) {
     cbSecret = cbSetting.value;
-    console.log("json body : " + req.body);
-    var message = req.body;
+    var message = JSON.stringify(req.body);
     console.log(`clickbank ins message ${message}`);
-    var notification = decryptIpn(cbSecret, message);
+    var notification = decryptIpn(cbSecret, req.body);
     if (notification != null) {
       var cbIpn = processIpn(notification);
       return { message: "clickbank ins request processed" };
