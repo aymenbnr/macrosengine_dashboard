@@ -45,15 +45,18 @@ const processIpn = async (notification) => {
         fullname: notification.customer.billing.fullName,
         email: notification.customer.billing.email,
         source: "clickbank",
+        receipt: notification.receipt,
       });
-      await SendLicenseEmail(license);
+      var emailObj = await SendLicenseEmail(license);
+      console.log("--------EMAIL RESP--------");
+      console.log(JSON.stringify(emailObj));
     } else if (
       notification.transactionType == "RFND" ||
       notification.transactionType == "CGBK"
     ) {
       await DisableLicense({
         project: firstProject.productTitle,
-        email: notification.billing.email,
+        email: notification.customer.billing.email,
       });
     }
   }
