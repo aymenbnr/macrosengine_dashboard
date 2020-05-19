@@ -105,6 +105,13 @@ async function SaveBlobBackup() {
   });
 }
 
+async function GetLatestVersion(project) {
+  return await Version.findOne({
+    projectName: project.name,
+    version: project.latestVersion,
+  });
+}
+
 module.exports = {
   GetLicenseById: GetLicenseById,
   GetOneLicense: GetOneLicense,
@@ -118,4 +125,5 @@ module.exports = {
   ApiKey: GetApiKey,
   CreateZipBackup: CreateZipBackup,
   SaveBlobBackup: SaveBlobBackup,
+  GetLatestVersion: GetLatestVersion,
 };

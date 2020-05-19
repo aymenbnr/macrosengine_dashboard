@@ -8,6 +8,7 @@ const {
   GetLicenseActivations,
   GetLicenseActivation,
   ApiKey,
+  GetLatestVersion,
 } = require("../Core/DBExtractor");
 const { AddActivation, AddLicenseActivation } = require("../Core/DBAdd");
 const messages = require("../config/messages");
@@ -37,6 +38,13 @@ async function ProcessApiRequest(endpoint, req, res) {
           claims.message = resp.message.value;
         }
 
+        if (endpoint == "latest") {
+          var resp = await LatestEndpoint(payload);
+          console.log(resp);
+          claims.res = resp.status;
+          claims.message = resp.message;
+        }
+
         var jwt = nJwt.create(claims, apikey.value, "HS256");
         var token = jwt.compact();
         res.send(token);
@@ -47,8 +55,32 @@ async function ProcessApiRequest(endpoint, req, res) {
   }
 }
 
+async function LatestEndpoint(payload) {
+  var { secretkey } = payload.body;
+  const getProject = await GetOneProject({ secretkey: secretkey });
+  if (getProject) {
+    const getVersion = await GetLatestVersion(getProject);
+    var updateUrl = getProject.updateurl;
+    if (getVersion.updateurl != "") {
+      updateUrl = getVersion.updateurl;
+    }
+    var msg = {
+      version: getVersion.version,
+      update_url: updateUrl,
+      releasedate: getVersion.releasedate,
+      changelog: getVersion.changelog,
+    };
+    return { status: "OK", message: msg };
+  } else {
+    return {
+      status: "ERROR",
+      message: "a project with the same secret key is non existant!",
+    };
+  }
+}
+
 async function VerifyEndpoint(payload) {
-  var { secretkey, license, hwid, random } = payload.body;
+  var { secretkey, license, hwid } = payload.body;
   var respstatus = "error";
   var respmsg = await messages.failed();
   var projectname = "n/a";

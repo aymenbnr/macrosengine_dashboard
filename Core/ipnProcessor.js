@@ -1,5 +1,6 @@
 const { decryptIpn, processIpn } = require("./IPN/clickbankipn");
 const { jvZooIpn } = require("./IPN/jvzooipn");
+const { paypalIpn } = require("./IPN/paypalipn");
 const Setting = require("../models/Setting");
 
 async function ProcessIpnRequest(endpoint, req, res) {

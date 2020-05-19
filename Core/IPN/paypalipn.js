@@ -32,4 +32,4 @@ const paypalIpn = async (req) => {
   
 };
 
-module.exports = { jvZooIpn };
+module.exports = { paypalIpn };

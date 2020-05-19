@@ -32,22 +32,24 @@ const decryptIpn = (secretkey, secretParams) => {
 const processIpn = async (notification) => {
   if (notification != null) {
     var [firstProject] = notification.lineItems;
-    if (notification.transactionType == "SALE") {
+    if (
+      notification.transactionType == "SALE" ||
+      notification.transactionType == "TEST"
+    ) {
       var license = await CreateLicense({
         project: firstProject.productTitle,
         fullname: notification.billing.fullName,
         email: notification.billing.email,
         source: "clickbank",
       });
-    } else if (notification.transactionType == "RFND") {
+    } else if (
+      notification.transactionType == "RFND" ||
+      notification.transactionType == "CGBK"
+    ) {
       await DisableLicense({
         project: firstProject.productTitle,
         email: notification.billing.email,
       });
-    } else if (notification.transactionType == "CGBK") {
-      //chargeback notification
-    } else if (notification.transactionType == "TEST") {
-      //test sale notification
     }
   }
 };
