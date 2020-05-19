@@ -20,7 +20,8 @@ async function ProcessApiRequest(endpoint, req, res) {
   const { token } = req.body;
   const apikey = await ApiKey();
   if (apikey) {
-    console.log(apikey.value);
+    console.log("api key " + apikey.value);
+    console.log("calling endpoint : " + endpoint);
     nJwt.verify(token, apikey.value, "HS256", async (error, payload) => {
       var claims = {
         random: payload.body.random,
@@ -32,7 +33,6 @@ async function ProcessApiRequest(endpoint, req, res) {
         claims.res = "error";
         claims.message = error;
       } else {
-        console.log("calling endpoint : " + endpoint);
         if (endpoint == "verify") {
           var resp = await VerifyEndpoint(payload);
           console.log(resp);
