@@ -21,6 +21,7 @@ async function ClickBank(req) {
     var message = JSON.stringify(req.body);
     console.log(`clickbank ins message ${message}`);
     var notification = decryptIpn(cbSecret, req.body);
+    console.log(`clickbank ins message ${JSON.stringify(notification)}`);
     if (notification != null) {
       var cbIpn = processIpn(notification);
       return { message: "clickbank ins request processed" };

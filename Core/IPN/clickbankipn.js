@@ -30,6 +30,8 @@ const decryptIpn = (secretkey, secretParams) => {
 };
 
 const processIpn = async (notification) => {
+  console.log("----------------");
+  console.log(JSON.stringify(notification));
   if (notification != null) {
     var [firstProject] = notification.lineItems;
     if (
