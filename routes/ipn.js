@@ -8,7 +8,7 @@ router.post("/:endpoint", async (req, res) => {
     var response = await ProcessIpnRequest(req.params.endpoint, req, res);
     res.json(response);
   } catch (error) {
-    console.log("IPN ERROR >> " + error);
+    console.error("IPN ERROR >> " + error);
     res.json(error);
   }
 });
