@@ -24,12 +24,13 @@ async function ProcessApiRequest(endpoint, req, res) {
     nJwt.verify(token, apikey.value, "HS256", async (error, payload) => {
       var claims = {
         random: payload.body.random,
-        res: "error",
-        message: "unknown",
+        res: "n/a",
+        message: "n/a",
       };
 
       if (error) {
-        res.send(error);
+        claims.res = "error";
+        claims.message = error;
       } else {
         if (endpoint == "verify") {
           var resp = await VerifyEndpoint(payload);
