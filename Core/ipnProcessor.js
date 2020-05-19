@@ -3,7 +3,7 @@ const { jvZooIpn } = require("./IPN/jvzooipn");
 const { paypalIpn } = require("./IPN/paypalipn");
 const Setting = require("../models/Setting");
 
-async function ProcessIpnRequest(endpoint, req, res) {
+async function ProcessIpnRequest(endpoint, req) {
   if (endpoint == "clickbank") {
     return await ClickBank(req);
   } else if (endpoint == "paypal") {
@@ -18,7 +18,7 @@ async function ClickBank(req) {
   var cbSetting = await Setting.findOne({ name: "cb_secret" });
   if (cbSetting) {
     cbSecret = cbSetting.value;
-    console.log("json body : " + request.body);
+    console.log("json body : " + req.body);
     var message = req.body;
     console.log(`clickbank ins message ${message}`);
     var notification = decryptIpn(cbSecret, message);
