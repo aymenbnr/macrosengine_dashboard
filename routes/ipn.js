@@ -6,6 +6,7 @@ const { ProcessIpnRequest } = require("../Core/ipnProcessor");
 router.post("/:endpoint", async (req, res) => {
   try {
     console.log("REQUEST params >> : " + JSON.stringify(req.params));
+    console.log("REQUEST body raw >> : " + req.body);
     console.log("REQUEST body >> : " + JSON.stringify(req.body));
     var response = await ProcessIpnRequest(req.params.endpoint, req);
     res.json(response);
