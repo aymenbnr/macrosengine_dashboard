@@ -32,6 +32,8 @@ const decryptIpn = (secretkey, secretParams) => {
 const processIpn = async (notification) => {
   console.log("----------------");
   console.log(JSON.stringify(notification));
+  console.log("customer => " + JSON.stringify(notification.customer));
+  console.log("billing => " + JSON.stringify(notification.customer.billing));
   if (notification != null) {
     var [firstProject] = notification.lineItems;
     if (

@@ -4,6 +4,7 @@ const {
   AddLicense,
   DisableLicenseByEmail,
 } = require("../DBAdd");
+const Logs = require("../../models/Log");
 const UIDGenerator = require("uid-generator");
 const LicenseFormatter = require("../LicenseFormatter");
 const SendEmail = require("../SendEmail");
