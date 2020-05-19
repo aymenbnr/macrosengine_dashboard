@@ -10,7 +10,11 @@ const { SendLicenseEmail } = require("../Core/IPN/LicenseFactory");
 // add license
 
 router.post("/:endpoint", async (req, res) => {
-  ProcessApiRequest(req.params.endpoint, req, res);
+  try {
+    ProcessApiRequest(req.params.endpoint, req, res);
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 module.exports = router;

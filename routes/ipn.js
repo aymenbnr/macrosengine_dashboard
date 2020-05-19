@@ -4,8 +4,12 @@ const router = express.Router();
 const { ProcessIpnRequest } = require("../Core/ipnProcessor");
 
 router.post("/:endpoint", async (req, res) => {
-  var response = await ProcessIpnRequest(req.params.endpoint, req, res);
-  res.json(response);
+  try {
+    var response = await ProcessIpnRequest(req.params.endpoint, req, res);
+    res.json(response);
+  } catch (error) {
+    res.json(error);
+  }
 });
 
 module.exports = router;
