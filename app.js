@@ -63,6 +63,7 @@ app.use("/project", require("./routes/project.js"));
 app.use("/version", require("./routes/version.js"));
 app.use("/apikeys", require("./routes/apikeys.js"));
 app.use("/api", require("./routes/api.js"));
+app.use("/ipn", require("./routes/ipn.js"));
 app.use("/logs", require("./routes/logs.js"));
 app.use("/backup", require("./routes/backup.js"));
 

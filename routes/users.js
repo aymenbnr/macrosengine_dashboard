@@ -166,6 +166,15 @@ router.get("/edit/:id", ensureAuthenticated, async (req, res) => {
   }
 });
 
+// delete user Page
+router.get("/delete/:id", ensureAuthenticated, async (req, res) => {
+  console.log(req.params.id);
+  User.findByIdAndDelete(req.params.id).then((user) => {
+    req.flash("success_msg", `User ${user.name} deleted!`);
+    res.redirect("/userslist");
+  });
+});
+
 // add user GET
 router.get("/add", ensureAuthenticated, async (req, res) => {
   res.render("users-add", {
