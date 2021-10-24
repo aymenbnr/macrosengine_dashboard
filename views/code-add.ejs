@@ -1,0 +1,28 @@
+<% include ./partials/header %>
+<div class="card card-body">
+    <h2>Add a new Code</h2>
+    <% include ./partials/messages %>
+    <form action="/code/add" method="post">
+        <fieldset>
+
+            <div class="form-group">
+                <label for="codeproject">Select A Project</label>
+                <select class="form-control" id="codeproject" name="codeproject">
+                  <% projects.forEach(project => { %>
+                  <option value="<%= project.name %>"><%= project.name %></option>
+                  <% }) %>
+        
+                </select>
+              </div>
+
+            <div class="form-group">
+                <label for="licensecode">Code (automatically generated)</label>
+                <input type="text" class="form-control" id="secretkey" name="licensecode" value="<%= licensecode %>"
+                    readonly="">
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </fieldset>
+    </form>
+</div>

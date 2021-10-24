@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.23.0",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "crypto-js": "^4.0.0",
@@ -29,6 +30,7 @@
     "nodemailer": "^6.4.6",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "password-generator": "^2.3.2",
     "pp-ipn": "^1.1.0",
     "uid-generator": "^2.0.0",
     "versiony": "^2.0.1"

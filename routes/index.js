@@ -4,6 +4,7 @@ const { ensureAuthenticated, forwardAuthenticated } = require("../config/auth");
 const Licenses = require("../models/License");
 const Settings = require("../models/Setting");
 const Projects = require("../models/Project");
+const Codes = require("../models/Code");
 const ApiKey = require("../models/ApiKey");
 const Logs = require("../models/Log");
 const Version = require("../models/Version");
@@ -77,6 +78,15 @@ router.get("/projects", ensureAuthenticated, async (req, res) => {
   const projectsList = await Projects.find();
   res.render("projects", {
     projects: projectsList,
+    user: req.user,
+  });
+});
+
+// codes
+router.get("/codesmanager", ensureAuthenticated, async (req, res) => {
+  const codesList = await Codes.find();
+  res.render("codesmanager", {
+    codes: codesList,
     user: req.user,
   });
 });

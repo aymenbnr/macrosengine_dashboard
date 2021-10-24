@@ -67,6 +67,7 @@ app.use("/api", require("./routes/api.js"));
 app.use("/ipn", require("./routes/ipn.js"));
 app.use("/logs", require("./routes/logs.js"));
 app.use("/backup", require("./routes/backup.js"));
+app.use("/code", require("./routes/code.js"));
 
 const PORT = process.env.PORT || 5000;
 
