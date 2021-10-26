@@ -7,6 +7,7 @@ const Code = require("../models/Code");
 //const UIDGenerator = require("uid-generator");
 //var fetch = require("isomorphic-unfetch");
 var passwordGenerator = require("password-generator")
+var deepEmailValidator = require("deep-email-validator")
 
 // add project GET
 router.get("/add", ensureAuthenticated, async (req, res) => {
@@ -65,6 +66,20 @@ router.post("/redeem", (req, res) => {
             // and for the love of everyone, restore their inputs
     }
 });
+
+  var validate =   await deepEmailValidator.validate ({
+    email: email,
+    validateRegex: true,
+    validateMx: true,
+    validateTypo: true,
+    validateDisposable: true,
+    validateSMTP: false,
+  });
+
+  if(validate.valid == false){
+    req.flash("error_msg", `invalid email!`);
+    res.redirect("/code/redeem");
+  }
 
   var cpCode = Code.findOne({code:code});
   if(cpCode)

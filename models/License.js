@@ -35,7 +35,10 @@ const LicenseSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  addons: {
+    type: Array,
+  },
 });
 
 const License = mongoose.model('License', LicenseSchema);

@@ -39,6 +39,9 @@ const ProjectSchema = new mongoose.Schema({
   },
   latestRelease: {
     type: String
+  },
+  addons: {
+    type: Array
   }
 });
 

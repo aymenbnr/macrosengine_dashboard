@@ -15,6 +15,9 @@ const CodeSchema = new mongoose.Schema({
   },
   license: {
     type: String
+  },
+  addons: {
+    type: Array
   }
 });
 
