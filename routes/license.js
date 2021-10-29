@@ -98,6 +98,24 @@ router.post("/edit", ensureAuthenticated, async (req, res) => {
   });
 });
 
+router.post("/reset", async (req, res) => {
+  const { licenseKey, email } = req.body;
+
+  var license = await License.findOne({
+    licensekey: licenseKey, email: email
+  });
+  if (license == null) {
+    console.log("no license found");
+    req.flash("error_msg", `license not found`);
+    res.redirect("/license/reset");  
+  }
+  license.activations = 0;
+  await license.save();
+  await DeleteLicenseActivations(license.licensekey);
+  req.flash("success_msg", `License has been reset`);
+  res.redirect("/license/reset");
+});
+
 //delete license
 router.get("/delete/:id", ensureAuthenticated, (req, res) => {
   console.log(req.params.id);
@@ -137,6 +155,11 @@ router.get("/enable/:id", ensureAuthenticated, async (req, res) => {
   await license.save();
   req.flash("success_msg", "License disabled!");
   res.redirect("/license/view/" + req.params.id);
+});
+
+//reset license
+router.get("/license/reset", ensureAuthenticated, async (req, res) => {
+  res.render("reset-license");
 });
 
 //edit license
