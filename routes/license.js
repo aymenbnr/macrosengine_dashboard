@@ -98,8 +98,26 @@ router.post("/edit", ensureAuthenticated, async (req, res) => {
   });
 });
 
-router.post("/reset", async (req, res) => {
+router.post("/resetlic", async (req, res) => {
   const { licenseKey, email } = req.body;
+
+
+  
+  verifyRecaptcha(req.body["g-recaptcha-response"], function(success) {
+    if (success) {
+            //res.end("Success!");
+            req.flash("success_msg", `captcha success , now redeem code`);
+            res.redirect("/license/resetlic");
+            // TODO: do registration using params in req.body
+    } else {
+
+            req.flash("error_msg", `Captcha failed, sorry.`);
+            res.redirect("/license/resetlic");
+            //res.end("Captcha failed, sorry.");
+            // TODO: take them back to the previous page
+            // and for the love of everyone, restore their inputs
+    }
+});
 
   var license = await License.findOne({
     licensekey: licenseKey, email: email
@@ -107,13 +125,13 @@ router.post("/reset", async (req, res) => {
   if (license == null) {
     console.log("no license found");
     req.flash("error_msg", `license not found`);
-    res.redirect("/license/reset");  
+    res.redirect("/license/resetlic");  
   }
   license.activations = 0;
   await license.save();
   await DeleteLicenseActivations(license.licensekey);
   req.flash("success_msg", `License has been reset`);
-  res.redirect("/license/reset");
+  res.redirect("/license/resetlic");
 });
 
 //delete license
@@ -158,7 +176,7 @@ router.get("/enable/:id", ensureAuthenticated, async (req, res) => {
 });
 
 //reset license
-router.get("/license/reset", ensureAuthenticated, async (req, res) => {
+router.get("/resetlic", async (req, res) => {
   res.render("reset-license");
 });
 
@@ -196,5 +214,24 @@ router.get("/view/:id", ensureAuthenticated, async (req, res) => {
     user: req.user,
   });
 });
+
+function verifyRecaptcha(key, callback) {
+  https.get("https://www.google.com/recaptcha/api/siteverify?secret=" + process.env.RECAPTCHA_SECRET + "&response=" + key, function(res) {
+      var data = "";
+      res.on('data', function (chunk) {
+                      data += chunk.toString();
+      });
+      res.on('end', function() {
+          try {
+              var parsedData = JSON.parse(data);
+              console.log(parsedData);
+              callback(parsedData.success);
+          } catch (e) {
+              callback(false);
+          }
+      });
+  });
+}
+
 
 module.exports = router;
