@@ -4,6 +4,11 @@ const { ensureAuthenticated, forwardAuthenticated } = require("../config/auth");
 const {CreateLicenseRequest} = require("../Core/ApiEndpoint")
 const Project = require("../models/Project");
 const Code = require("../models/Code");
+const {
+  CreateLicense,
+  DisableLicense,
+  SendLicenseEmail,
+} = require("../Core/IPN/LicenseFactory");
 //const UIDGenerator = require("uid-generator");
 //var fetch = require("isomorphic-unfetch");
 var passwordGenerator = require("password-generator")
@@ -45,10 +50,11 @@ router.get("/redeem", async (req, res) => {
 });
 
 // add project POST
-router.post("/redeem", (req, res) => {
+router.post("/redeem", async (req, res) => {
   const {
     code,
-    email
+    email,
+    fullname
   } = req.body;
 
   verifyRecaptcha(req.body["g-recaptcha-response"], function(success) {
@@ -82,9 +88,33 @@ router.post("/redeem", (req, res) => {
   }
 
   var cpCode = Code.findOne({code:code});
-  if(cpCode)
+  if(cpCode && cpCode.used == false)
   {
-    var result = CreateLicenseRequest(email,code.project);
+
+    if(process.env.LICENSE_API_ACTIVE ==true){
+      var result = CreateLicenseRequest(email,code.project,fullname);
+    }
+    else{
+      //create the license, send the email!
+
+      var license = await CreateLicense({
+        project: project,
+        fullname: fullname,
+        email: email,
+        source: "redeem code",
+        receipt: code,
+      });
+      var emailObj = await SendLicenseEmail(license);
+      console.log("--------EMAIL RESP--------");
+      console.log(JSON.stringify(emailObj));
+
+    }
+    
+    // update the redeem code with license detail, mark as used!
+
+    cpCode.used = true;
+    cpCode.license = license.licensekey;
+    await cpCode.save();
 
     req.flash("success_msg", `Code ${code} has been redeemed, check your email!`);
     res.redirect("/code/redeem");
@@ -92,7 +122,7 @@ router.post("/redeem", (req, res) => {
   }
   else{
 
-    req.flash("error_msg", `Code ${code} is invalid!`);
+    req.flash("error_msg", `Code ${code} is invalid or has been redeemed!`);
     res.redirect("/code/redeem");
 
   }
